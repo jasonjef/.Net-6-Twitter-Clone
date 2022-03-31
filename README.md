@@ -25,6 +25,8 @@ Then, navigate into the project directory:
 ![Register Activation](https://cdn.discordapp.com/attachments/916029512884563999/959012933025812501/unknown.png)
 - ### Forgot Password Form 
 ![Forgot Password Form ](https://cdn.discordapp.com/attachments/916029512884563999/959009618678394930/unknown.png)
+- ### Forgot Password Mail
+![Forgot Password Mail](https://cdn.discordapp.com/attachments/916029512884563999/959010294519201832/unknown.png)
 - ### Enter New Password
 ![Enter New Password](https://cdn.discordapp.com/attachments/916029512884563999/959011461286486036/unknown.png)
 - ### Main Page
