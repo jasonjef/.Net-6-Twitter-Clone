@@ -1,0 +1,36 @@
+@model List<Message>
+
+<link rel="stylesheet" href="~/css/message.css" asp-append-version="true" />
+
+@{
+    Layout = null;
+}
+
+
+<div id="container23">
+    <aside>
+        <header>
+            <input type="text" placeholder="search">
+        </header>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <img src="@item.SenderUser.ProfileImagePath" alt="">
+                    <div>
+                        <a asp-controller="Message" asp-action="Detail" asp-route-mid="@item.SenderId">@item.SenderUser.Name</a>
+                        <h3>
+                            <span class="status orange"></span>
+                            offline
+                        </h3>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </aside>
+
+</div>
+
+
+

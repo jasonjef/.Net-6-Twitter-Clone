@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="center" id="center">
+    @await Component.InvokeAsync("PostForm")
+
+    @await Component.InvokeAsync("PostList")
+</div>
+
+
+
+@section Sidebar{
+<partial name="_Search" />
+<partial name="_Trends" />
+@await Component.InvokeAsync("Trend")
+
+<partial name="_Footer" />
+}
+
+@section Scripts {
+<script>
+    // document ready event
+    $(function() {
+        //$('.timer').each(function (index, item) {
+        //    item.innerHTML = moment(item.innerText, "hh").fromNow();
+        //});
+
+        $(".btnReaction").on( "click", function(){
+            var postId = $(this).data('post-id');
+            var reactionType = $(this).data('reaction-type');
+            $.ajax({
+                method: 'POST',
+                url: "/post/reaction",
+                data: { postId: postId, reactionType: reactionType },
+                success: (result) => {
+                    if (reactionType=='R')
+                        cname = 'text-success';
+                    else if (reactionType=='L')
+                        cname = 'text-danger';
+                    else
+                        cname='';
+
+                    $(this).children('i').toggleClass(cname);
+            }});
+        });
+    });
+</script>
+}

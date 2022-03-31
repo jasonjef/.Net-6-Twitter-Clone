@@ -1,0 +1,38 @@
+﻿@model User
+
+
+<link rel="stylesheet" href="~/css/post.css" asp-append-version="true" />
+
+<div class="mainarea">
+    <div class="mainpage">
+        <span>Anasayfa</span>
+        <a href=""><i class="fas fa-fire"></i></a>
+    </div>
+    <div class="tweet">
+        <div class="tweetarea">
+            @if (Model.ProfileImagePath != null)
+            {
+                <img src="@Model.ProfileImagePath" alt="">
+            }
+            else
+            {
+                <img src="https://pbs.twimg.com/profile_images/1460701250643759106/HrBxj5bQ_400x400.jpg" alt="">
+            }
+            <form asp-controller="Post" asp-action="Create" method="POST" class="chatarea1">
+                <input type="textarea" maxlength="180" class="txtarea1" placeholder="Neler oluyor?" name="query"></input>
+                <a href="" class="everyoneResponse">Herkes yanıtlayabilir</a>
+                <div class="popfooter1">
+                    <div class="popnav1">
+                        <a href=""><i class="fas fa-image"></i></a>
+                        <a href=""><i class="fas fa-calendar-week"></i></a>
+                        <a href=""><i class="fas fa-poll-h"></i></a>
+                        <a href=""><i class="fas fa-smile"></i></a>
+                    </div>
+                    <div class="tweetboxbutton">
+                        <a type="submit" value="Create">Tweetle</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

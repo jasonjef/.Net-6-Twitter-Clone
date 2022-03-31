@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AspNetMvcSocial</title>
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AspNetMvcSocial.styles.css" asp-append-version="true" />
+</head>
+<body style="background-color: black;">
+    <div class="container-fluid mains">
+        <div class="row">
+            @await Component.InvokeAsync("Navbar")
+            <div class="col-lg-8">
+                <div class="row">
+                     @await RenderSectionAsync("Message", required: false)
+                     
+                     
+                    <div class="col-lg-5 cents">
+                        @RenderBody()
+                    </div>
+                    <div class="col-lg-4 fot">
+                        @await RenderSectionAsync("Sidebar", required: false)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

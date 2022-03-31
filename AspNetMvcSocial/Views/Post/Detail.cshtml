@@ -1,0 +1,129 @@
+﻿@model Post
+<link rel="stylesheet" href="~/css/post.css" asp-append-version="true" />
+
+<div class="box">
+    <div class="tweetTitle">
+        <div class="titleImg">
+            <img src="@Model.User.ProfileImagePath" alt="">
+        </div>
+        @if (Model.User.IsActive == false)
+        {
+            <div class="profilename">
+                <a asp-controller="Profile" asp-action="Index" asp-route-name="@Model.User.UserName">@Model.User.Name</a>
+                <a asp-controller="Profile" asp-action="Index" asp-route-name="@Model.User.UserName" class="username">@@@Model.User.UserName</a>
+            </div>
+        }
+        else
+        {
+            <div class="profilename">
+                <a asp-controller="Profile" asp-action="Index" asp-route-name="@Model.User.UserName">@Model.User.Name</a>
+                <a asp-controller="Profile" asp-action="Index" asp-route-name="@Model.User.UserName" class="username">@@@Model.User.UserName</a>
+                <i class="fa-solid fa-check"></i>
+            </div>
+        }
+        <div class="profilesett">
+            <a asp-controller="Post" asp-action="Detail" asp-route-id="@Model.Id" value="id" class="timer">@Model.CreatedAt</a>
+        </div>
+        @if (@Model.User.UserName == User.Identity.Name)
+        {
+            <div class="tweetconfg">
+                <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" class="twetdelete">-</a>
+            </div>
+        }
+        else
+        {
+
+        }
+    </div>
+    <div class="row2">
+        <div class="tweetContent">
+            <p>
+                @Model.Content
+            </p>
+            <div class="tweetContentImg">
+                @if (@Model.ContentImgPath != null)
+                {
+                    <img src="@Model.ContentImgPath" alt="">
+                }
+            </div>
+        </div>
+        @{
+            var reactions = Model.Reactions.Where(e => e.User.UserName == User.Identity.Name);
+        }
+        <div class="tweetNav">
+            <li class="comments">
+                <a id="comment" asp-controller="Post" asp-action="Detail" asp-route-id="@Model.Id"><i class="far fa-comment"><span class="comment_count">@Model.PostComments.Count</span></i></a>
+            </li>
+            <li>
+                <a href="#" class="btnReaction" data-reaction-type="R" data-post-id="@Model.Id">
+                    @{
+                        var className1 = "";
+                        if (reactions.Any(e => e.ReactionType == "R"))
+                        {
+                            className1 = "text-success";
+                        }
+                    }
+                    <i class="fas fa-retweet @className1"><span class="comment_rection">@Model.Reactions.Where(e => e.ReactionType == "R").ToList().Count</span></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="btnReaction" data-reaction-type="L" data-post-id="@Model.Id">
+                    @{
+                        var className2 = "";
+                        if (reactions.Any(e => e.ReactionType == "L"))
+                        {
+                            className2 = "text-danger";
+                        }
+                    }
+                    <i class="fas fa-heart @className2"><span class="comment_rection">@Model.Reactions.Where(e => e.ReactionType == "L").ToList().Count</span></i>
+                </a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-share-square"></i></a>
+            </li>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("PostFormComment")
+@await Component.InvokeAsync("PostComment")
+
+
+
+
+@section Sidebar {
+
+<partial name="_Search" />
+<partial name="_Trends" />
+<partial name="_Footer" />
+}
+
+@section Scripts {
+<script>
+    // document ready event
+    $(function() {
+        //$('.timer').each(function (index, item) {
+        //    item.innerHTML = moment(item.innerText, "hh").fromNow();
+        //});
+
+        $(".btnReaction").on( "click", function(){
+            var postId = $(this).data('post-id');
+            var reactionType = $(this).data('reaction-type');
+            $.ajax({
+                method: 'POST',
+                url: "/post/reaction",
+                data: { postId: postId, reactionType: reactionType },
+                success: (result) => {
+                    if (reactionType=='R')
+                        cname = 'text-success';
+                    else if (reactionType=='L')
+                        cname = 'text-danger';
+                    else
+                        cname='';
+
+                    $(this).children('i').toggleClass(cname);
+            }});
+        });
+    });
+</script>
+}

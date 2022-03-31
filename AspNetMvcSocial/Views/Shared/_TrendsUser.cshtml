@@ -1,0 +1,31 @@
+﻿@model List<User>
+
+<div class="whofollow">
+    <div class="top">
+        <h6>Kimi Takip Etmeli</h6>
+    </div>
+    <div class="topfollow">
+        @foreach (var item in Model)
+        {
+            <li class="tops">
+                <div class="topprofie">
+                    <div>
+                        <img src="@item.ProfileImagePath" alt="">
+                        <div class="profilesec">
+                            <a href="#">@item.Name</a>
+                            <span>@@@item.UserName</span>
+                        </div>
+                    </div>
+                    <div class="followbutton">
+                        <a href="#">Takip Et</a>
+                    </div>
+                </div>
+            </li>
+        }
+        <li class="endmore">
+            <div class="more">
+                <a href="">Daha fazla göster</a>
+            </div>
+        </li>
+    </div>
+</div>

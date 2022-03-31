@@ -1,0 +1,37 @@
+﻿@model List<User>
+
+<div class="whofollow">
+    <div class="top">
+        <h6>Kimi Takip Etmeli</h6>
+    </div>
+    <div class="topfollow">
+        @foreach (var item in Model)
+        {
+            <li class="tops">
+                <div class="topprofie">
+                    <img src="@item.ProfileImagePath" alt="">
+                    <div class="profilesec">
+                        @if(item.IsActive == true)
+                        {
+                           <a asp-controller="Profile" asp-action="Index" asp-route-name="@item.UserName">@item.Name <i class="fa-solid fa-check"></i></a>
+                        }else{
+                            <a asp-controller="Profile" asp-action="Index" asp-route-name="@item.UserName">@item.Name</a>
+                        }
+                        
+                       <span asp-controller="Profile" asp-action="Index" asp-route-name="@item.UserName">@@@item.UserName</span>
+                    </div>
+
+                </div>
+
+            </li>
+            <div class="followbutton">
+                <a href="#">Takip Et</a>
+            </div>
+        }
+        <li class="endmore">
+            <div class="more">
+                <a href="">Daha fazla göster</a>
+            </div>
+        </li>
+    </div>
+</div>

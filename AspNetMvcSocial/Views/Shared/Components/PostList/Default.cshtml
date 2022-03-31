@@ -1,0 +1,93 @@
+﻿@model List<Post>
+
+<link rel="stylesheet" href="~/css/post.css" asp-append-version="true" />
+
+@foreach (var item in Model)
+{
+    <div class="box">
+        <div class="tweetTitle">
+
+            <div class="titleImg">
+                <img src="@item.User.ProfileImagePath" alt="">
+            </div>
+            @if (@item.User.IsActive == false)
+            {
+                <div class="profilename">
+                    <a asp-controller="Profile" asp-action="Index" asp-route-name="@item.User.UserName">@item.User.Name</a>
+                    <a asp-controller="Profile" asp-action="Index" asp-route-name="@item.User.UserName" class="username">@@@item.User.UserName</a>
+                </div>
+            }
+            else
+            {
+                <div class="profilename">
+                    <a asp-controller="Profile" asp-action="Index" asp-route-name="@item.User.UserName">@item.User.Name</a>
+                    <a asp-controller="Profile" asp-action="Index" asp-route-name="@item.User.UserName" class="username">@@@item.User.UserName</a>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+            }
+            <div class="profilesett">
+                <a asp-controller="Post" asp-action="Detail" asp-route-id="@item.Id" class="timer">@item.CreatedAt</a>
+            </div>
+            @if (@item.User.UserName == User.Identity.Name)
+            {
+                <div class="tweetconfg">
+                    <a asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id" class="twetdelete">-</a>
+                </div>
+            }
+            else
+            {
+
+            }
+        </div>
+        <div class="row2">
+            <div class="tweetContent">
+                <p>
+                    @item.Content
+                </p>
+                <div class="tweetContentImg">
+                    @if (@item.ContentImgPath != null)
+                    {
+                        <img src="@item.ContentImgPath" alt="">
+
+                    }
+
+                </div>
+            </div>
+            @{
+                var reactions = item.Reactions.Where(e => e.User.UserName == User.Identity.Name);
+            }
+            <div class="tweetNav">
+                <li class="comments">
+                    <a id="comment" asp-controller="Post" asp-action="Detail" asp-route-id="@item.Id"><i class="far fa-comment"><span class="comment_count">@item.PostComments.Count</span></i></a>
+                </li>
+                <li>
+                    <a href="#" class="btnReaction" data-reaction-type="R" data-post-id="@item.Id">
+                        @{
+                            var className1 = "";
+                            if (reactions.Any(e => e.ReactionType == "R"))
+                            {
+                                className1 = "text-success";
+                            }
+                        }
+                        <i class="fas fa-retweet @className1"><span class="comment_rection">@item.Reactions.Where(e => e.ReactionType == "R").ToList().Count</span></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="btnReaction" data-reaction-type="L" data-post-id="@item.Id">
+                        @{
+                            var className2 = "";
+                            if (reactions.Any(e => e.ReactionType == "L"))
+                            {
+                                className2 = "text-danger";
+                            }
+                        }
+                        <i class="fas fa-heart @className2"><span class="comment_rection">@item.Reactions.Where(e => e.ReactionType == "L").ToList().Count</span></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-share-square"></i></a>
+                </li>
+            </div>
+        </div>
+    </div>
+}
