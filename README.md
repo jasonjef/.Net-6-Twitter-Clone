@@ -4,7 +4,7 @@
 ## Install
 First, clone the repository into your local workspace:
 ```
-    git clone 
+    git clone https://github.com/alpyesil/.Net-6-Twitter-Clone.git
 ```
 
 Then, navigate into the project directory:
