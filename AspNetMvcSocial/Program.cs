@@ -1,15 +1,27 @@
 using App.Application;
-using App.Application.Interfaces;
-using App.Application.Services;
-using App.Application.Services.Mail;
 using App.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.SubFolder)
+    .AddDataAnnotationsLocalization();
+
+// Set the default and supported cultures. 
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "tr-TR", "en-US" };
+    options.SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+    options.FallBackToParentUICultures = true;
+});
 
 builder.Services.AddBusinessServices(builder.Configuration.GetConnectionString("DefaultConnection"));
 
@@ -51,6 +63,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRequestLocalization();
 
 app.UseRouting();
 

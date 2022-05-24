@@ -1,11 +1,12 @@
 ﻿@model User
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 <link rel="stylesheet" href="~/css/post.css" asp-append-version="true" />
 
 <div class="mainarea">
     <div class="mainpage">
-        <span>Anasayfa</span>
+        <span>@Localizer["AppHome"]</span>
         <a href=""><i class="fas fa-fire"></i></a>
     </div>
     <div class="tweet">
