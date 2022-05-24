@@ -1,8 +1,9 @@
 ﻿@model List<User>
+@inject IViewLocalizer Localizer
 
 <div class="whofollow">
     <div class="top">
-        <h6>Kimi Takip Etmeli</h6>
+        <h6>@Localizer["WhoToFollow"]</h6>
     </div>
     <div class="topfollow">
         @foreach (var item in Model)
@@ -25,12 +26,12 @@
 
             </li>
             <div class="followbutton">
-                <a href="#">Takip Et</a>
+                <a href="#">@Localizer["FollowButton"]</a>
             </div>
         }
         <li class="endmore">
             <div class="more">
-                <a href="">Daha fazla göster</a>
+                <a href="">@Localizer["MoreButton"]</a>
             </div>
         </li>
     </div>
