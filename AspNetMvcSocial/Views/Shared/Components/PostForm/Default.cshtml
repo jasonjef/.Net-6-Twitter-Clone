@@ -19,8 +19,8 @@
                 <img src="https://pbs.twimg.com/profile_images/1460701250643759106/HrBxj5bQ_400x400.jpg" alt="">
             }
             <form asp-controller="Post" asp-action="Create" method="POST" class="chatarea1">
-                <input type="textarea" maxlength="180" class="txtarea1" placeholder="Neler oluyor?" name="query"></input>
-                <a href="" class="everyoneResponse">Herkes yanıtlayabilir</a>
+                <input type="textarea" maxlength="180" class="txtarea1" placeholder="@Localizer["Opener"]" name="query"></input>
+                <a href="" class="everyoneResponse">@Localizer["EveryoneResponse"]</a>
                 <div class="popfooter1">
                     <div class="popnav1">
                         <a href=""><i class="fas fa-image"></i></a>
@@ -29,7 +29,7 @@
                         <a href=""><i class="fas fa-smile"></i></a>
                     </div>
                     <div class="tweetboxbutton">
-                        <a type="submit" value="Create">Tweetle</a>
+                        <a type="submit" value="Create">@Localizer["PostPrompt"]</a>
                     </div>
                 </div>
             </form>

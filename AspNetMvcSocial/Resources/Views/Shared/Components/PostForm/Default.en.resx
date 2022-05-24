@@ -120,4 +120,13 @@
   <data name="AppHome" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="EveryoneResponse" xml:space="preserve">
+    <value>Anyone can answer</value>
+  </data>
+  <data name="Opener" xml:space="preserve">
+    <value>What's going on?</value>
+  </data>
+  <data name="PostPrompt" xml:space="preserve">
+    <value>Tweet</value>
+  </data>
 </root>

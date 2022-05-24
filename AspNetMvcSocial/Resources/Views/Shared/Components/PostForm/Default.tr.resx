@@ -120,4 +120,13 @@
   <data name="AppHome" xml:space="preserve">
     <value>Anasayfa</value>
   </data>
+  <data name="EveryoneResponse" xml:space="preserve">
+    <value>Herkes yanıtlayabilir</value>
+  </data>
+  <data name="Opener" xml:space="preserve">
+    <value>Neler oluyor?</value>
+  </data>
+  <data name="PostPrompt" xml:space="preserve">
+    <value>Tweetle</value>
+  </data>
 </root>
